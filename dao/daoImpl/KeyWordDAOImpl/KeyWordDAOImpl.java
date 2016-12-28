@@ -3,7 +3,7 @@ package cn.edu.bjtu.weibo.dao;
 import java.util.List;
 
 import redis.clients.jedis.Jedis;
-
+@Respository(keywordDAO)
 public class KeyWordDAOImpl implements KeyWordDAO {
 Jedis jedis;
 	
