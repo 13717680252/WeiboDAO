@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import redis.clients.jedis.Jedis;
-
+@Respository(imgDAO)
 public class ImgDAOImpl implements ImgDAO {
 	Jedis jedis=null;
 	public ImgDAOImpl() {
@@ -27,22 +27,22 @@ public class ImgDAOImpl implements ImgDAO {
 	@Override
 	public String getimgOrUrl(String imgid) {
 		
-		return jedis.get("image:"+imgid+"imgOrUrl");
+		return jedis.get("image:"+imgid+":imgOrUrl");
 	}
 
 	@Override
 	public String getimgThUrl(String imgid) {
-		return jedis.get("image:"+imgid+"imgThUrl");
+		return jedis.get("image:"+imgid+":imgThUrl");
 	}
 
 	@Override
 	public String getLikeNumber(String imgid) {
-		return jedis.get("image:"+imgid+"likeNumber");
+		return jedis.get("image:"+imgid+":likeNumber");
 	}
 
 	@Override
 	public List<String> getLikeList(String imgid) {
-		return jedis.lrange("image:"+imgid+"like",0,-1);
+		return jedis.lrange("image:"+imgid+":like",0,-1);
 	}
 
 
@@ -65,7 +65,7 @@ public class ImgDAOImpl implements ImgDAO {
 
 	@Override
 	public boolean updateLikeList(String imgid,String userid) {
-	jedis.lpush("image:"+imgid+"like", userid);
+	jedis.lpush("image:"+imgid+":like", userid);
 		return true;
 	}
 
