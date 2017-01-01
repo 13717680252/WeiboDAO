@@ -165,10 +165,17 @@ public class WeiboDAOImpl implements WeiboDAO {
 	@Override
 	public boolean  insertLikeList(String weiboId, String userId) {		
 		String key = "weibo:"+weiboId + ":like";
-		jedis.lpush(key, userId);
-		key = "weibo:"+weiboId + ":likeNumber";
-		jedis.incr(key);
-		return true;
+		List<String>list=jedis.lrange("weiboList",0,-1);
+		for(int i=0;i<list.size();i++){
+			if(("w"+list.get(i)).equals(weiboId))
+			{
+				jedis.lpush(key, userId);
+				key = "weibo:"+weiboId + ":likeNumber";
+				jedis.incr(key);
+				return true;
+			}
+		}
+	return false;
 
 	}
 
@@ -177,21 +184,29 @@ public class WeiboDAOImpl implements WeiboDAO {
 	@Override
 	public boolean insertCommentList(String weiboId, String userId) {
 		String key = "weibo:"+weiboId + ":comment";
+		List<String>list=jedis.lrange("weiboList",0,-1);
+		for(int i=0;i<list.size();i++){
+			if(("w"+list.get(i)).equals(weiboId)){
 		jedis.lpush(key, userId);
 		 key = "weibo:"+weiboId + ":commentNumber";
 			jedis.incr(key);
-		return true;
+		return true;}}
+		return false;
 	}
 
 
 	@Override
 	public boolean insertForwardList(String weiboId, String userId) {
 		String key = "weibo:"+weiboId + ":forward";
+		List<String>list=jedis.lrange("weiboList",0,-1);
+		for(int i=0;i<list.size();i++){
+			if(("w"+list.get(i)).equals(weiboId)){
 		jedis.lpush(key, userId);
  key = "weibo:"+weiboId + ":forwardNumber";
 		jedis.incr(key);
 		return true;
-
+			}}
+		return false;
 	}
 
 	@Override
