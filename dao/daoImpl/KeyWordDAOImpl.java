@@ -8,13 +8,13 @@ import redis.clients.jedis.Jedis;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
-import java.util.HashSet;
+
 import junit.framework.TestCase;
-import com.sun.org.apache.bcel.internal.generic.NEW;
-import org.junit.Test;
+
 import org.apache.commons.pool.impl.GenericObjectPool.Config;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
+import pl.quaternion.SentinelBasedJedisPoolWrapper;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.exceptions.JedisConnectionException;
 

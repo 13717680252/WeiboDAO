@@ -7,10 +7,9 @@ import java.util.Set;
 import redis.clients.jedis.Jedis;
 
 import java.util.*;
-import java.util.HashSet;
-import junit.framework.TestCase;
-import com.sun.org.apache.bcel.internal.generic.NEW;
-import org.junit.Test;
+
+
+
 import org.apache.commons.pool.impl.GenericObjectPool.Config;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
@@ -18,9 +17,11 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.exceptions.JedisConnectionException;
 
 import org.springframework.stereotype.Repository;
+
+import pl.quaternion.SentinelBasedJedisPoolWrapper;
 @Repository("imgDAO")
 public class ImgDAOImpl implements ImgDAO {
-	Jedis jedis=null;
+	Jedis jedis;
 	public ImgDAOImpl() {
 		
 		final Set<String> sentinels = new HashSet<String>();
@@ -35,6 +36,7 @@ public class ImgDAOImpl implements ImgDAO {
 		jedis = pool.getResource();
 		pool.returnResource(jedis);
 		pool.destroy();
+
 	}
 
 	@Override
@@ -44,7 +46,7 @@ public class ImgDAOImpl implements ImgDAO {
 		String key = "image:img" + str + ":";
 		jedis.set(key+"time",time);
 		jedis.set(key+"imgOrUrl", imgOrUrl);
-		jedis.set(key="imgThUrl", ImgThurl);
+		jedis.set(key+"imgThUrl", ImgThurl);
 		jedis.set(key+"likeNumber", "0");
 		return null;
 	}

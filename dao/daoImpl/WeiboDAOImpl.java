@@ -7,22 +7,23 @@ import java.util.Set;
 import cn.edu.bjtu.weibo.model.Weibo;
 import redis.clients.jedis.Jedis;
 
+
+
 import java.util.*;
-import java.util.*;
-import java.util.HashSet;
+
 import junit.framework.TestCase;
-import com.sun.org.apache.bcel.internal.generic.NEW;
-import org.junit.Test;
+
+
 import org.apache.commons.pool.impl.GenericObjectPool.Config;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 
 
+
 import redis.clients.jedis.exceptions.JedisConnectionException;
 
-
-
-
 import org.springframework.stereotype.Repository;
+
+import pl.quaternion.SentinelBasedJedisPoolWrapper;
 @Repository("weiboDAO")
 public class WeiboDAOImpl implements WeiboDAO {
 	Jedis jedis;
@@ -40,6 +41,8 @@ public class WeiboDAOImpl implements WeiboDAO {
 		jedis = pool.getResource();
 		pool.returnResource(jedis);
 		pool.destroy();
+		//jedis = new Jedis("localhost", 6379);
+		
 	}
 
 	@Override
