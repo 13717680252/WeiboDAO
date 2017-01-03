@@ -173,7 +173,7 @@ public class WeiboDAOImpl implements WeiboDAO {
 	    int end=start+numberPerPage;
 	    if(end>=list.size())
 	    	end=list.size();
-	    if(pageIndex<0||numberPerPage<=0||end>=list.size()){
+	    if(pageIndex<0||numberPerPage<=0||end>list.size()){
 	    	return null;
 	    }
 	    
@@ -189,7 +189,7 @@ public class WeiboDAOImpl implements WeiboDAO {
 	    int end=start+numberPerPage;
 	    if(end>=list.size())
 	    	end=list.size();
-	    if(pageIndex<0||numberPerPage<=0||end>=list.size()){
+	    if(pageIndex<0||numberPerPage<=0||end>list.size()){
 	    	return null;
 	    }
 	    
@@ -229,7 +229,7 @@ public class WeiboDAOImpl implements WeiboDAO {
 	    int end=start+numberPerPage;
 	    if(end>=list.size())
 	    	end=list.size();
-	    if(pageIndex<0||numberPerPage<=0||end>=list.size()){
+	    if(pageIndex<0||numberPerPage<=0||end>list.size()){
 	    	return null;
 	    }
 		return list.subList(start, end);
